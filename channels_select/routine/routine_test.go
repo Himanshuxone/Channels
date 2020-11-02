@@ -10,7 +10,6 @@ import(
 
 // TestChannelSuccess will create a success test for channel function
 func TestChannel(t *testing.T){
-    defer goleak.VerifyNone(t)
 	var wg sync.WaitGroup
 	var tests = []struct {
         want int
@@ -28,4 +27,15 @@ func TestChannel(t *testing.T){
             }
         })
     }
+}
+
+func BenchmarkChannel(b *testing.B){
+    var wg sync.WaitGroup
+    for i := 0; i < b.N; i++ {
+        Channel(&wg)
+    }
+}
+
+func TestMain(m *testing.M) {
+	goleak.VerifyTestMain(m)
 }

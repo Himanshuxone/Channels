@@ -2,7 +2,7 @@ package routine
 
 import(
 	"sync"
-	"fmt"
+	// "fmt"
 )
 
 // Channel for running routines
@@ -23,12 +23,12 @@ func Channel(wg *sync.WaitGroup) int{
 		select {
 		case data, ok :=  <-data1:
 			if ok {
-				fmt.Println("more data", "current =>", data)
+				_ = data
+				// fmt.Println("more data", "current =>", data)
 			}else{
-				fmt.Println("channel closed")
+				// fmt.Println("channel closed")
 				return 0
 			}
-		default:
 		}
 	}
 }
